@@ -163,18 +163,8 @@ app.post('/employee', async (req, res) => {
     const employee = new employeeModel(req.body);
     
     try {
-      await employee.save((err) => {
-        if(err){
-          //Custome error handling
-          //console.log(err.errors['firstname'].message)
-          //console.log(err.errors['lastname'].message)
-          //console.log(err.errors['gender'].message)
-          //console.log(err.errors['salary'].message)
-          res.send(err)
-        }else{
-          res.send(employee);
-        }
-      });
+      await employee.save();
+      res.status(201).send(employee);
     } catch (err) {
       res.status(500).send(err);
     }
